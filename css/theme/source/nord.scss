@@ -1,0 +1,123 @@
+/**
+ * Nord theme for reveal.js. https://www.nordtheme.com/
+ *
+ * By Michael Hall
+ */
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+// Include theme-specific fonts
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+// Import the nord colour swatches
+@import "../template/palette/nord.scss";
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: $nord6;
+
+$mainColor: $nord1;
+$headingColor: $nord0;
+
+$mainFontSize: 42px;
+$mainFont: 'Rubik', Helvetica, sans-serif;
+$headingFont: 'Rubik', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: normal;
+$headingFontWeight: 700;
+$linkColor: $nord10;
+$linkColorHover: lighten($linkColor, 15%);
+$selectionBackgroundColor: lighten($linkColor, 25%);
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+$borderColour: $nord7;
+
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+  color: $borderColour; }
+
+/*********************************************
+ * BORDER OF SLIDES
+ *********************************************/
+.reveal .controls {
+  right: 50px;
+  bottom: 50px;
+}
+
+.line {
+  content: '';
+  position: fixed;
+  background: $borderColour;
+  z-index: 105;
+}
+
+.line.top {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 30px;
+}
+
+@media (max-width: 840px) {
+  .line.top {
+    height: 15px;
+  }
+}
+
+.line.bottom {
+  left: 0;
+  top: auto;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+
+@media (max-width: 840px) {
+  .line.bottom {
+    height: 15px;
+  }
+}
+
+.line.left {
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 200%;
+}
+
+@media (max-width: 840px) {
+  .line.left {
+    width: 15px;
+  }
+}
+
+.line.right {
+  left: auto;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 200%;
+}
+
+@media (max-width: 840px) {
+  .line.right {
+    width: 15px;
+  }
+}

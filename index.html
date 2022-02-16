@@ -8,15 +8,25 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/nord.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
-		<div class="reveal">
+	<!--	Border line around slides		-->
+	<div class="line top"></div>
+	<div class="line bottom"></div>
+	<div class="line left"></div>
+	<div class="line right"></div>
+	<!--	Border line around slides		-->
+	<div class="reveal">
+
 			<div class="slides">
-				<section>Slide 1</section>
+				<section>
+					<h2>Slide 1</h2>
+					Some text
+				</section>
 				<section>Slide 2</section>
 			</div>
 		</div>
@@ -30,6 +40,7 @@
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+				margin: 0.2,
 				hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
