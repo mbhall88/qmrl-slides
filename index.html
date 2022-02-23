@@ -28,7 +28,168 @@
 					<br>
 					Michael Hall $\in$ Iqbal Group @ EMBL-EBI<br>
 				</section>
-				<section>Slide 2</section>
+				<section>
+					<p class="fragment fade-in-then-semi-out">Illumina increasingly being used for TB clustering and DST (England, the Netherlands, New York State)</p>
+					<p class="fragment">Requires large capital outlay and significant testing volume to be cost-effective and ensure clinically appropriate turnaround times</p>
+				</section>
+				<section>
+					<p class="fragment fade-in-then-semi-out">ONT's MinION device offers solution to these two issues</p>
+					<p class="fragment fade-in-then-semi-out">Error rate has been an obstacle in the past</p>
+					<p class="fragment">Some early signs that error rate has sufficiently improved for DST and clustering</p>
+				</section>
+				<section>
+					<a href="https://doi.org/10.1128/JCM.00583-20" target="_blank"><img src="imgs/smith2021.png"></a>
+					<ul>
+						<li>431 isolates sequenced on both platforms</li>
+						<li>DST results highly concordant</li>
+						<li>Clustering lacked detail</li>
+						<li>In-house scripts and catalogues</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Aim</h2>
+					<p>Compare Nanopore to Illumina in its ability to: predict drug resistance and identify putative transmission clusters using SNPs</p>
+				</section>
+				<section>
+					<h2>Data</h2>
+					<ul>
+						<li class="fragment fade-in-then-semi-out">208 isolates from Madagascar ($n$=109), South Africa (67), England (32)</li>
+						<li class="fragment fade-in-then-semi-out">Sequenced from same DNA extraction on Illumina and Nanopore</li>
+						<li class="fragment">35 Malagasy isolates sequenced on PacBio CCS</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Quality control</h2>
+					<ul>
+						<li class="fragment fade-in-then-semi-out">Nanopore basecalled with Guppy <b>v5.0.16</b></li>
+						<li class="fragment fade-in-then-semi-out">Remove non-Mtb reads (all data)</li>
+						<li class="fragment fade-in-then-semi-out">Decontaminated read depth $\ge20$ (Illumina; $n$=1) $\ge30$ (Nanopore; $n$=37) with 6 failing both</li>
+						<li class="fragment fade-in-then-semi-out">Remove mixed and indeterminate lineage isolates ($n$=12)</li>
+						<li class="fragment fade-in-then-semi-out">One isolate found to have non-matched sequencing data</li>
+						<li class="fragment">151 total isolates after QC</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Variant calling</h2>
+					<p class="fragment fade-in-then-semi-out">SNP-based clustering relies on high-quality SNP calls</p>
+					<p class="fragment fade-in-then-semi-out">Illumina: <a href="https://github.com/oxfordmmm/CompassCompact">COMPASS</a> (stampy, samtools, and BCFtools)</p>
+					<p class="fragment fade-in"><p class="fragment highlight-red">Nanopore: Minimap2 and BCFtools (<b>v1.13</b>) with custom filtering</p></p>
+					<ul>
+						<li class="fragment fade-in">Quality score $\lt85$</li>
+						<li class="fragment fade-in">$\lt1$% reads on both strands</li>
+						<li class="fragment fade-in">Read depth $\lt20$% isolate median</li>
+						<li class="fragment fade-in">Variant distance bias (VDB) $\lt0.00001$</li>
+						<li class="fragment fade-in">$\lt90$% reads supporting called allele</li>
+					</ul>
+				</section>
+				<section>
+					<h2>SNP evaluation</h2>
+					<p class="fragment fade-in-then-semi-out">Seven isolates with PacBio CCS data over 20x read depth</p>
+					<p class="fragment fade-in-then-semi-out">Assemble with <a href="https://github.com/fenderglass/Flye" target="_blank">Flye</a> and polish for indels with Illumina</p>
+					<p class="fragment fade-in-then-semi-out">Evaluate precision and recall with <code><a target="_blank" href="https://github.com/iqbal-lab-org/varifier">varifier</a></code> and
+						<code><a href="https://github.com/Illumina/hap.py" target="_blank">hap.py</a></code></p>
+				</section>
+				<section>
+					<p>Recall = $\frac{TP}{TP+FN}$ | Precision = $\frac{TP}{TP+FP}$</p>
+					<img width="700" src="imgs/filter-precision-recall.png">
+				</section>
+				<section>
+					<h2>SNP distance</h2>
+					<p><code><a href="https://github.com/mbhall88/psdm">psdm</a></code> to generate distance matrix</p>
+					<img width="650" src="imgs/full.dotplot.png">
+				</section>
+				<section>
+					<h2>SNP distance</h2>
+					<p>Isolates within (Illumina) distance of 20 SNPs</p>
+					<img width="650" src="imgs/close.dotplot.png">
+				</section>
+				<section>
+					<h2>Evaluating SNP-based transmission clusters</h2>
+					<p>Illumina thresholds of interest 5 and 12</p>
+					<p class="fragment fade-in-then-semi-out">Take Illumina clustering as truth and see how similar Nanopore clustering is</p>
+					<p class="fragment fade-in-then-semi-out">What Nanopore thresholds to use?</p>
+					<p class="fragment fade-in">How to define similarity?</p>
+				</section>
+				<section>
+					<h2>Cluster similarity - recall</h2>
+					<p><b>SACR</b> - sample-averaged cluster recall</p>
+					<p>$$\frac{\left|C_{n,I}\cap C_{n,N}\right|}{|C_{n,I}|}$$</p>
+					<p>$C_{n,I}$ - the Illumina ($I$) cluster of isolate $n$</p>
+					<p>$C_{n,N}$ - the Nanopore ($N$) cluster of isolate $n$</p>
+					<p>$\cap$ - intersection</p>
+					<p>$|x|$ - size/length of $x$</p>
+				</section>
+				<section>
+					<h2>Cluster similarity - precision</h2>
+					<p><b>SACP</b> - sample-averaged cluster precision</p>
+					<p>$$\frac{\left|C_{n,I}\cap C_{n,N}\right|}{|C_{n,N}|}$$</p>
+					<p>Same as SACR, but denominator is size of Nanopore cluster</p>
+				</section>
+				<section>
+					<h2>Cluster similarity - excess clustering rate</h2>
+					<p>SACR and SACP don't identify Nanopore clusters solely composed of Illumina singletons</p>
+					<p>$$XCR = \frac{|S_I-S_N|}{|S_I|}$$</p>
+					<p>$S_I$ - Illumina singletons</p>
+				</section>
+				<section>
+					<p>Example: Illumina (left) and Nanopore (right)</p>
+					<img height="400" src="imgs/illumina-cluster-example.png">
+					<img height="400" src="imgs/ont-cluster-example.png">
+					<style type="text/css">
+						.tg  {border-collapse:collapse;border-spacing:0;border-bottom: 1px solid black}
+						.tg td{border-color:black;border-style:solid;border-width:1px;font-size:22px;
+							overflow:hidden;padding:10px 5px;word-break:normal;}
+						.tg th{border-color:black;border-style:solid;border-width:1px;font-size:22px;
+							font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+						.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+						@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>
+					<div class="tg-wrap"><table class="tg">
+						<thead>
+						<tr>
+							<th class="tg-0pky">sample</th>
+							<th class="tg-0pky">A</th>
+							<th class="tg-0pky">B</th>
+							<th class="tg-0pky">C</th>
+							<th class="tg-0pky">D</th>
+							<th class="tg-0pky">E</th>
+							<th class="tg-0pky">F</th>
+							<th class="tg-0pky">G</th>
+							<th class="tg-0pky">H</th>
+							<th class="tg-0pky">I</th>
+							<th class="tg-0pky">J</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td class="tg-0pky">recall</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">0.8</td>
+							<td class="tg-0pky">0.8</td>
+							<td class="tg-0pky">0.8</td>
+							<td class="tg-0pky">0.8</td>
+							<td class="tg-0pky">0.0</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">precision</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">0.66</td>
+							<td class="tg-0pky">0.66</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">1.0</td>
+							<td class="tg-0pky">0.0</td>
+						</tr>
+						</tbody>
+					</table></div>
+					<p>20 Illumina singletons - XCR of $2/20=0.1$.</p>
+				</section>
 			</div>
 		</div>
 
