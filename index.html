@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Nanopore sequencing for Mycobacterium tuberculosis drug susceptibility testing and outbreak investigation</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -53,6 +53,37 @@
 					<p>Compare Nanopore to Illumina in its ability to: predict drug resistance and identify putative transmission clusters using SNPs</p>
 				</section>
 				<section>
+					<h2>Acknowledgements</h2>
+					<div class="row">
+						<div class="column">
+							<b>Madagascar</b><br>
+							<ul>
+								<li>Marie Sylvianne Rabodoarivelo</li>
+								<li>Niaina Rakotosamimanana</li>
+								<li>Simon Grandjean Lapierre</li>
+							</ul><br><br>
+							<b>EMBL-EBI</b><br>
+							Zamin Iqbal
+						</div>
+						<div class="column">
+							<b>South Africa</b><br>
+							<ul>
+								<li>Anastasia Koch</li>
+								<li>Anzaan Dippenaar</li>
+								<li>Helen Cox</li>
+								<li>Robin Warren</li>
+								<li>Melanie Grobbelaar</li>
+							</ul><br><br>
+							<b>Oxford</b><br>
+							<ul>
+								<li>Tim Walker</li>
+								<li>Tim Peto</li>
+								<li>Sophie George</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
 					<h2>Data</h2>
 					<ul>
 						<li class="fragment fade-in-then-semi-out">208 isolates from Madagascar ($n$=109), South Africa (67), England (32)</li>
@@ -73,9 +104,9 @@
 				</section>
 				<section>
 					<h2>Variant calling</h2>
-					<p class="fragment fade-in-then-semi-out">SNP-based clustering relies on high-quality SNP calls</p>
+					<p class="fragment fade-in-then-semi-out">SNP-based requires high-quality SNP calls</p>
 					<p class="fragment fade-in-then-semi-out">Illumina: <a href="https://github.com/oxfordmmm/CompassCompact">COMPASS</a> (stampy, samtools, and BCFtools)</p>
-					<p class="fragment fade-in"><p class="fragment highlight-red">Nanopore: Minimap2 and BCFtools (<b>v1.13</b>) with custom filtering</p></p>
+					<span class="fragment fade-in"><span class="fragment highlight-red">Nanopore: Minimap2 and BCFtools (<b>v1.13</b>) with custom filtering</span></span>
 					<ul>
 						<li class="fragment fade-in">Quality score $\lt85$</li>
 						<li class="fragment fade-in">$\lt1$% reads on both strands</li>
@@ -197,7 +228,207 @@
 				</section>
 				<section>
 					<h4>Selecting Nanopore SNP thresholds</h4>
-					<img width="600" src="imgs/cluster_threshold_sweep.png">
+					<img width="550" src="imgs/cluster_threshold_sweep.png">
+				</section>
+				<section>
+					<h3>5-SNP clusters</h3>
+					<img src="imgs/clusterst5.png" height="600">
+				</section>
+				<section>
+					<h3>12-SNP clusters</h3>
+					<img src="imgs/clusterst12.png" height="600">
+				</section>
+				<section>
+					<h3>Mixed technology</h3>
+					<img src="imgs/mixed_self_distance.png" height="600">
+				</section>
+				<section>
+					<h3>Mixed technology</h3>
+					<img src="imgs/mixed.dotplot.png" height="600">
+				</section>
+				<section>
+					<h3>Mixed technology</h3>
+					<img src="imgs/mixed_simulations.png" height="600">
+				</section>
+				<section>
+					<h2>Drug resistance</h2>
+					<p class="fragment fade-in-then-semi-out">How do Nanopore WGS-based predictions compare to Illumiuna? (Mykrobe)</p>
+					<p class="fragment fade-in-then-semi-out">If different, what do phenotypes say?</p>
+					<p class="fragment fade-in">Primary focus is genotype concordance - thoroughly validated</p>
+				</section>
+				<section>
+					<h3>Mykrobe catalogue</h3>
+					<ul>
+						<li class="fragment fade-in-then-semi-out">476 amino acids changes (3,352 nucleotide mutations)</li>
+						<li class="fragment fade-in-then-semi-out">60 promoter SNPs</li>
+						<li class="fragment fade-in-then-semi-out">1,904 nucleotide-level SNPs and indels</li>
+						<li class="fragment fade-in-then-semi-out">All <em>katG</em> and <em>pncA</em> 1/2bp frameshifts (61,258)</li>
+						<li class="fragment fade-in">Total of 66,574 nucleotide-level resistance mutations</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Mykrobe genotype concordance</h3>
+					<p class="fragment fade-in-then-semi-out">One isolate with a 1bp deletion in <em>katG</em></p>
+					<p class="fragment fade-in">One isolate with three 1bp deletions in <em>katG</em></p>
+				</section>
+				<section>
+					<h3>Mykrobe prediction concordance</h3>
+					<style type="text/css">
+						.thick .tg-0pky {
+							border-bottom-width: 4px;
+						}
+						.tg  {border-collapse:collapse;border-spacing:0;}
+						.tg td{border-color:black;border-style:solid;border-width:1px;font-size:20px;
+							overflow:hidden;padding:10px 5px;word-break:normal;}
+						.tg th{border-color:black;border-style:solid;border-width:1px;font-size:20px;
+							font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+						.tg .tg-0lax{text-align:left;vertical-align:top}
+						.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+						.tg-sort-header::-moz-selection{background:0 0}
+						.tg-sort-header::selection{background:0 0}.tg-sort-header{cursor:pointer}
+						.tg-sort-header:after{content:'';float:right;margin-top:7px;border-width:0 5px 5px;border-style:solid;
+							border-color:#404040 transparent;visibility:hidden}
+						.tg-sort-header:hover:after{visibility:visible}
+						.tg-sort-asc:after,.tg-sort-asc:hover:after,.tg-sort-desc:after{visibility:visible;opacity:.4}
+						.tg-sort-desc:after{border-bottom:none;border-width:5px 5px 0}@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>
+					<div class="tg-wrap"><table id="tg-fOdTz" class="tg">
+						<thead>
+						<tr>
+							<th class="tg-0lax">Drug</th>
+							<th class="tg-0lax">FN(R)</th>
+							<th class="tg-0lax">FP(S)</th>
+							<th class="tg-0lax">FNR(95% CI)</th>
+							<th class="tg-0lax">FPR(95% CI)</th>
+							<th class="tg-0lax">PPV(95% CI)</th>
+							<th class="tg-0lax">NPV(95% CI)</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td class="tg-0pky">Isoniazid</td>
+							<td class="tg-0pky">0(81)</td>
+							<td class="tg-0pky"><b>1</b>(70)</td>
+							<td class="tg-0pky">0.0% (0.0-4.5%)</td>
+							<td class="tg-0pky">1.4% (0.3-7.7%)</td>
+							<td class="tg-0pky">98.8% (93.4-99.8%)</td>
+							<td class="tg-0pky">100.0% (94.7-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Rifampicin</td>
+							<td class="tg-0pky">0(79)</td>
+							<td class="tg-0pky">0(72)</td>
+							<td class="tg-0pky">0.0% (0.0-4.6%)</td>
+							<td class="tg-0pky">0.0% (0.0-5.1%)</td>
+							<td class="tg-0pky">100.0% (95.4-100.0%)</td>
+							<td class="tg-0pky">100.0% (94.9-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Ethambutol</td>
+							<td class="tg-0pky">0(54)</td>
+							<td class="tg-0pky">0(97)</td>
+							<td class="tg-0pky">0.0% (0.0-6.6%)</td>
+							<td class="tg-0pky">0.0% (0.0-3.8%)</td>
+							<td class="tg-0pky">100.0% (93.4-100.0%)</td>
+							<td class="tg-0pky">100.0% (96.2-100.0%)</td>
+						</tr>
+						<tr class="thick">
+							<td class="tg-0pky">Pyrazinamide</td>
+							<td class="tg-0pky">0(30)</td>
+							<td class="tg-0pky">0(121)</td>
+							<td class="tg-0pky">0.0% (0.0-11.4%)</td>
+							<td class="tg-0pky">0.0% (-0.0-3.1%)</td>
+							<td class="tg-0pky">100.0% (88.6-100.0%)</td>
+							<td class="tg-0pky">100.0% (96.9-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Streptomycin</td>
+							<td class="tg-0pky">0(47)</td>
+							<td class="tg-0pky"><b>1</b>(104)</td>
+							<td class="tg-0pky">0.0% (0.0-7.6%)</td>
+							<td class="tg-0pky">1.0% (0.2-5.2%)</td>
+							<td class="tg-0pky">97.9% (89.1-99.6%)</td>
+							<td class="tg-0pky">100.0% (96.4-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Amikacin</td>
+							<td class="tg-0pky">0(13)</td>
+							<td class="tg-0pky"><b>1</b>(138)</td>
+							<td class="tg-0pky">0.0% (0.0-22.8%)</td>
+							<td class="tg-0pky">0.7% (0.1-4.0%)</td>
+							<td class="tg-0pky">92.9% (68.5-98.7%)</td>
+							<td class="tg-0pky">100.0% (97.3-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Capreomycin</td>
+							<td class="tg-0pky">0(13)</td>
+							<td class="tg-0pky"><b>1</b>(138)</td>
+							<td class="tg-0pky">0.0% (0.0-22.8%)</td>
+							<td class="tg-0pky">0.7% (0.1-4.0%)</td>
+							<td class="tg-0pky">92.9% (68.5-98.7%)</td>
+							<td class="tg-0pky">100.0% (97.3-100.0%)</td>
+						</tr>
+						<tr class="thick">
+							<td class="tg-0pky">Kanamycin</td>
+							<td class="tg-0pky">0(14)</td>
+							<td class="tg-0pky"><b>1</b>(137)</td>
+							<td class="tg-0pky">0.0% (0.0-21.5%)</td>
+							<td class="tg-0pky">0.7% (0.1-4.0%)</td>
+							<td class="tg-0pky">93.3% (70.2-98.8%)</td>
+							<td class="tg-0pky">100.0% (97.3-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Ciprofloxacin</td>
+							<td class="tg-0pky">0(16)</td>
+							<td class="tg-0pky">0(135)</td>
+							<td class="tg-0pky">0.0% (0.0-19.4%)</td>
+							<td class="tg-0pky">0.0% (0.0-2.8%)</td>
+							<td class="tg-0pky">100.0% (80.6-100.0%)</td>
+							<td class="tg-0pky">100.0% (97.2-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Moxifloxacin</td>
+							<td class="tg-0pky">0(16)</td>
+							<td class="tg-0pky">0(135)</td>
+							<td class="tg-0pky">0.0% (0.0-19.4%)</td>
+							<td class="tg-0pky">0.0% (0.0-2.8%)</td>
+							<td class="tg-0pky">100.0% (80.6-100.0%)</td>
+							<td class="tg-0pky">100.0% (97.2-100.0%)</td>
+						</tr>
+						<tr>
+							<td class="tg-0pky">Ofloxacin</td>
+							<td class="tg-0pky">0(17)</td>
+							<td class="tg-0pky">0(134)</td>
+							<td class="tg-0pky">0.0% (0.0-18.4%)</td>
+							<td class="tg-0pky">0.0% (0.0-2.8%)</td>
+							<td class="tg-0pky">100.0% (81.6-100.0%)</td>
+							<td class="tg-0pky">100.0% (97.2-100.0%)</td>
+						</tr>
+						</tbody>
+					</table></div>
+				</section>
+				<section>
+					<h2>Drug susceptibility testing</h2>
+					<img src="imgs/available-dst.png" height="600">
+				</section>
+				<section>
+					<h3>Phenotype concordance</h3>
+					<img src="imgs/phenotype_concordance.png" height="600">
+				</section>
+				<section>
+					<h3>Impact of Nanopore read depth</h3>
+					<div style="line-height: 0">
+						 <img src="imgs/dst-depth.png" height="300">
+						 <img src="imgs/decumulative-depth.png" height="300">
+					</div>
+				</section>
+				<section>
+					<h2>Summary</h2>
+					<p class="fragment">Nanopore SNP precision/recall similar to Illumina</p>
+					<p class="fragment">Nanopore clusters do not miss isolates</p>
+					<p class="fragment">Mixing technologies is possible</p>
+					<p class="fragment">Nanopore resistance predictions consistent with Illumina</p>
+					<p class="fragment">Read depth of 30x does not impact resistance predictions</p>
+					<p class="fragment"><a href="https://mbh.sh/qmrl-slides/">https://mbh.sh/qmrl-slides/</a></p>
 				</section>
 			</div>
 		</div>

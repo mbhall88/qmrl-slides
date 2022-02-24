@@ -427,3 +427,24 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
     width: 15px;
   }
 }
+/*********************************************
+ * BOX SHADOW FOR IMAGES
+ *********************************************/
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*********************************************
+ * COLUMN LAYOUT - https://www.w3schools.com/howto/howto_css_two_columns.asp
+ *********************************************/
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
